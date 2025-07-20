@@ -1,0 +1,132 @@
+package models
+
+import (
+	"MAPIK/internal/types"
+	"time"
+
+	"gorm.io/datatypes"
+)
+
+// Status ključa
+const (
+	KeyStatusActive  = "active"
+	KeyStatusInvalid = "invalid"
+)
+
+// SystemSetting odgovara tabeli system_settings
+type SystemSetting struct {
+	ID           uint      `gorm:"primaryKey;autoIncrement" json:"id"`
+	SettingKey   string    `gorm:"type:varchar(255);not null;unique" json:"setting_key"`
+	SettingValue string    `gorm:"type:text;not null" json:"setting_value"`
+	Description  string    `gorm:"type:varchar(512)" json:"description"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
+}
+
+// GroupConfig skladišti konfiguraciju specifičnu za grupu
+type GroupConfig struct {
+	RequestTimeout               *int `json:"request_timeout,omitempty"`
+	IdleConnTimeout              *int `json:"idle_conn_timeout,omitempty"`
+	ConnectTimeout               *int `json:"connect_timeout,omitempty"`
+	MaxIdleConns                 *int `json:"max_idle_conns,omitempty"`
+	MaxIdleConnsPerHost          *int `json:"max_idle_conns_per_host,omitempty"`
+	ResponseHeaderTimeout        *int `json:"response_header_timeout,omitempty"`
+	MaxRetries                   *int `json:"max_retries,omitempty"`
+	BlacklistThreshold           *int `json:"blacklist_threshold,omitempty"`
+	KeyValidationIntervalMinutes *int `json:"key_validation_interval_minutes,omitempty"`
+	KeyValidationConcurrency     *int `json:"key_validation_concurrency,omitempty"`
+	KeyValidationTimeoutSeconds  *int `json:"key_validation_timeout_seconds,omitempty"`
+}
+
+// Group odgovara tabeli groups
+type Group struct {
+	ID              uint                 `gorm:"primaryKey;autoIncrement" json:"id"`
+	EffectiveConfig types.SystemSettings `gorm:"-" json:"effective_config,omitempty"`
+	Name            string               `gorm:"type:varchar(255);not null;unique" json:"name"`
+	Endpoint        string               `gorm:"-" json:"endpoint"`
+	DisplayName     string               `gorm:"type:varchar(255)" json:"display_name"`
+	Description     string               `gorm:"type:varchar(512)" json:"description"`
+	Upstreams       datatypes.JSON       `gorm:"type:json;not null" json:"upstreams"`
+	ChannelType     string               `gorm:"type:varchar(50);not null" json:"channel_type"`
+	Sort            int                  `gorm:"default:0" json:"sort"`
+	TestModel       string               `gorm:"type:varchar(255);not null" json:"test_model"`
+	ParamOverrides  datatypes.JSONMap    `gorm:"type:json" json:"param_overrides"`
+	Config          datatypes.JSONMap    `gorm:"type:json" json:"config"`
+	APIKeys         []APIKey             `gorm:"foreignKey:GroupID" json:"api_keys"`
+	LastValidatedAt *time.Time           `json:"last_validated_at"`
+	CreatedAt       time.Time            `json:"created_at"`
+	UpdatedAt       time.Time            `json:"updated_at"`
+}
+
+// APIKey odgovara tabeli api_keys
+type APIKey struct {
+	ID           uint       `gorm:"primaryKey;autoIncrement" json:"id"`
+	KeyValue     string     `gorm:"type:varchar(512);not null;uniqueIndex:idx_group_key" json:"key_value"`
+	GroupID      uint       `gorm:"not null;uniqueIndex:idx_group_key" json:"group_id"`
+	Status       string     `gorm:"type:varchar(50);not null;default:'active'" json:"status"`
+	RequestCount int64      `gorm:"not null;default:0" json:"request_count"`
+	FailureCount int64      `gorm:"not null;default:0" json:"failure_count"`
+	LastUsedAt   *time.Time `json:"last_used_at"`
+	CreatedAt    time.Time  `json:"created_at"`
+	UpdatedAt    time.Time  `json:"updated_at"`
+}
+
+// RequestLog odgovara tabeli request_logs
+type RequestLog struct {
+	ID           string    `gorm:"type:varchar(36);primaryKey" json:"id"`
+	Timestamp    time.Time `gorm:"not null;index" json:"timestamp"`
+	GroupID      uint      `gorm:"not null;index" json:"group_id"`
+	GroupName    string    `gorm:"type:varchar(255);index" json:"group_name"`
+	KeyValue     string    `gorm:"type:varchar(512)" json:"key_value"`
+	IsSuccess    bool      `gorm:"not null" json:"is_success"`
+	SourceIP     string    `gorm:"type:varchar(45)" json:"source_ip"`
+	StatusCode   int       `gorm:"not null" json:"status_code"`
+	RequestPath  string    `gorm:"type:varchar(500)" json:"request_path"`
+	Duration     int64     `gorm:"not null" json:"duration_ms"`
+	ErrorMessage string    `gorm:"type:text" json:"error_message"`
+	UserAgent    string    `gorm:"type:varchar(512)" json:"user_agent"`
+	Retries      int       `gorm:"not null" json:"retries"`
+	UpstreamAddr string    `gorm:"type:varchar(500)" json:"upstream_addr"`
+	IsStream     bool      `gorm:"not null" json:"is_stream"`
+}
+
+// StatCard podaci za pojedinačnu statističku karticu na kontrolnoj tabli
+type StatCard struct {
+	Value         float64 `json:"value"`
+	SubValue      int64   `json:"sub_value,omitempty"`
+	SubValueTip   string  `json:"sub_value_tip,omitempty"`
+	Trend         float64 `json:"trend"`
+	TrendIsGrowth bool    `json:"trend_is_growth"`
+}
+
+// DashboardStatsResponse API odgovor za osnovne statistike kontrolne table
+type DashboardStatsResponse struct {
+	KeyCount     StatCard `json:"key_count"`
+	GroupCount   StatCard `json:"group_count"`
+	RequestCount StatCard `json:"request_count"`
+	ErrorRate    StatCard `json:"error_rate"`
+}
+
+// ChartDataset skup podataka za grafikon
+type ChartDataset struct {
+	Label string  `json:"label"`
+	Data  []int64 `json:"data"`
+	Color string  `json:"color"`
+}
+
+// ChartData API odgovor za grafikone
+type ChartData struct {
+	Labels   []string       `json:"labels"`
+	Datasets []ChartDataset `json:"datasets"`
+}
+
+// GroupHourlyStat odgovara tabeli group_hourly_stats, koristi se za skladištenje statistike zahteva po satu za svaku grupu
+type GroupHourlyStat struct {
+	ID           uint      `gorm:"primaryKey;autoIncrement" json:"id"`
+	Time         time.Time `gorm:"not null;uniqueIndex:idx_group_time" json:"time"` // Vreme punog sata
+	GroupID      uint      `gorm:"not null;uniqueIndex:idx_group_time" json:"group_id"`
+	SuccessCount int64     `gorm:"not null;default:0" json:"success_count"`
+	FailureCount int64     `gorm:"not null;default:0" json:"failure_count"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
+}

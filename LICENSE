@@ -1,21 +1,11 @@
-MIT License
+MIT Licenca
 
-Copyright (c) 2025 Vuk Vujović
+Copyright (c) [Godina] [Ime nosioca autorskih prava]
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Ovim se daje besplatna dozvola svakoj osobi koja dobije kopiju ovog softvera i prateće dokumentacije (u daljem tekstu "Softver"), da trguje Softverom bez ograničenja, uključujući, ali ne ograničavajući se na prava korišćenja, kopiranja, modifikovanja, spajanja, objavljivanja, distribucije, podlicenciranja i/ili prodaje kopija Softvera, i da dozvoli osobama kojima je Softver dostavljen da to čine, pod sledećim uslovima:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Gorenavedena obaveštenja o autorskim pravima i ovo obaveštenje o dozvoli moraju biti uključeni u sve kopije ili značajne delove Softvera.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+SOFTVER SE PRUŽA "KAKAV JESTE", BEZ BILO KAKVE GARANCIJE, IZRIČITE ILI PODRAZUMEVANE, UKLJUČUJUĆI, ALI NE OGRANIČAVAJUĆI SE NA GARANCIJE ZA PRODAJU, POGODNOST ZA ODREĐENU NAMENU I NEPOVREDIVOST. NI U KOM SLUČAJU AUTORI ILI NOSIOCI AUTORSKIH PRAVA NEĆE BITI ODGOVORNI ZA BILO KAKVU TUŽBU, ŠTETU ILI DRUGU ODGOVORNOST, BILO U AKCIJI UGOVORA, DELIKTU ILI NA DRUGI NAČIN, KOJA PROISTIČE IZ, IZVAN ILI U VEZI SA SOFTVEROM ILI KORIŠĆENJEM ILI DRUGIM POSLOVANJEM U SOFTVERU.
+
+Zahvalnice: Ovaj projekat je inspirisan i koristi delove koda iz `gpt-load` projekta od `tbphp`.

@@ -1,0 +1,216 @@
+# Binarni fajlovi za programe i dodatke
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binarni fajl, izgrađen sa `go test -c`
+*.test
+*.txt
+
+# Izlaz alata za Go pokrivenost, posebno kada se koristi sa LiteIDE
+*.out
+
+# Direktorijumi zavisnosti (uklonite komentar ispod da biste ga uključili)
+# vendor/
+
+# Go radni prostor fajl
+go.work
+
+# Izlaz izgradnje
+build/
+dist/
+bin/
+
+# Promenljive okruženja
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# API ključevi i osetljivi fajlovi
+keys.txt
+*.key
+*.pem
+*.crt
+secrets/
+config/secrets/
+
+# Logovi
+*.log
+
+# Podaci o izvršavanju
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Direktorijum za pokrivenost koji koriste alati kao što je istanbul
+coverage/
+*.lcov
+
+# nyc test pokrivenost
+.nyc_output
+
+# Direktorijumi zavisnosti
+node_modules/
+
+# Opcioni npm keš direktorijum
+.npm
+
+# Opcioni eslint keš
+.eslintcache
+
+# Microbundle keš
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Opciona REPL istorija
+.node_repl_history
+
+# Izlaz 'npm pack'
+*.tgz
+
+# Yarn Integrity fajl
+.yarn-integrity
+
+# parcel-bundler keš (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Gatsby fajlovi
+.cache/
+public
+
+# Privremeni folderi
+tmp/
+temp/
+
+# Podaci o izvršavanju
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Direktorijum za instrumentovane biblioteke generisane od strane jscoverage/JSCover
+lib-cov
+
+# Direktorijum za pokrivenost koji koriste alati kao što je istanbul
+coverage
+*.lcov
+
+# Čuva VSCode verzije korišćene za testiranje VSCode ekstenzija
+.vscode-test
+
+# IDE fajlovi
+.idea/
+*.swp
+*.swo
+*~
+
+# Fajlovi generisani od strane OS-a
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker
+.dockerignore
+
+# Fajlovi baze podataka
+*.db
+*.sqlite
+*.sqlite3
+
+# Backup fajlovi
+*.bak
+*.backup
+*.old
+
+# Kompresovani fajlovi
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Lokalni razvoj
+local/
+dev/
+
+# Test fajlovi
+test-results/
+test-output/
+
+# Fajlovi za profilisanje
+*.prof
+*.pprof
+
+# Air alat za live reload
+tmp/
+
+# GoLand
+.idea/
+
+# Vim
+*.swp
+*.swo
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# VS Code
+*.code-workspace
+
+# JetBrains IDE-ovi
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Lokalno premošćavanje konfiguracije
+config.local.json
+config.local.yaml
+config.local.yml
+
+# Sertifikati
+*.crt
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Kubernetes
+*.kubeconfig
+
+# Helm
+charts/*.tgz
+
+# Skripte za lokalni razvoj
+run-local.sh
+start-local.sh
+dev-setup.sh
+data/
